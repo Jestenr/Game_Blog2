@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: gamereviewblog
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn game_blog.wsgi:application"

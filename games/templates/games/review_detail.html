@@ -1,0 +1,163 @@
+{% extends 'games/base.html' %}
+
+{% block content %}
+
+<div class="card">
+
+    <h1>
+
+        {{ review.game.title }}
+
+    </h1>
+
+    <br>
+
+    {% if review.game.image %}
+
+        <img
+            src="{{ review.game.image.url }}"
+        >
+
+    {% endif %}
+
+    <br><br>
+
+    <p>
+
+        Жанр:
+        {{ review.game.genre }}
+
+    </p>
+
+    <br>
+
+    <p>
+
+        Категория:
+        {{ review.game.category }}
+
+    </p>
+
+    <br>
+
+    <p>
+
+        Год выпуска:
+        {{ review.game.release_year }}
+
+    </p>
+
+    <br>
+
+    <p>
+
+        ⭐ {{ review.rating }}/10
+
+    </p>
+
+    <br>
+
+    <h3>
+
+        Краткое описание
+
+    </h3>
+
+    <p>
+
+        {{ review.short_text }}
+
+    </p>
+
+    <br>
+
+    <h3>
+
+        Полный обзор
+
+    </h3>
+
+    <p>
+
+        {{ review.full_text }}
+
+    </p>
+
+    <br>
+
+    <p>
+
+        Автор:
+        {{ review.author.username }}
+
+    </p>
+
+    {% if user == review.author or user.is_superuser %}
+
+<br><br>
+
+<a href="/edit/{{ review.id }}/">
+    ✏ Редактировать
+</a>
+
+<br><br>
+
+<a href="/delete/{{ review.id }}/">
+    🗑 Удалить
+</a>
+
+{% endif %}
+
+<hr>
+
+<h2>Комментарии</h2>
+
+{% if user.is_authenticated %}
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+
+        Отправить
+
+    </button>
+
+</form>
+
+{% endif %}
+
+<br>
+
+{% for comment in comments %}
+
+<div class="card">
+
+    <b>
+
+        {{ comment.author.username }}
+
+    </b>
+
+    <br><br>
+
+    {{ comment.text }}
+
+</div>
+
+{% empty %}
+
+<p>
+
+Комментариев пока нет
+
+</p>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

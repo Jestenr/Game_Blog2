@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>GameReviewBlog</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+}
+
+nav{
+background:#1e293b;
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-left:15px;
+}
+
+.container{
+width:90%;
+max-width:1200px;
+margin:20px auto;
+}
+
+.card{
+background:#1e293b;
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
+transition:0.3s;
+box-shadow:0 0 15px rgba(0,0,0,0.3);
+
+word-wrap: break-word;
+overflow-wrap: break-word;
+}
+.card:hover{
+transform:translateY(-5px);
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:10px;
+margin:10px 0;
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+padding:10px 20px;
+cursor:pointer;
+}
+
+img{
+width:100%;
+border-radius:10px;
+}
+
+.top-games{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+a{
+color:#60a5fa;
+text-decoration:none;
+}
+
+a:hover{
+color:white;
+}
+
+@media(max-width:768px){
+
+nav{
+flex-direction:column;
+gap:10px;
+}
+
+input{
+border:none;
+border-radius:10px;
+}
+
+input:focus{
+outline:none;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<h2>🎮 GameReviewBlog</h2>
+
+<div>
+
+<a href="/">Главная</a>
+
+<a href="/create/">Добавить обзор</a>
+
+{% if user.is_authenticated %}
+
+<a href="/logout/">Выход</a>
+
+{% if user.is_authenticated %}
+
+<a href="/profile/">
+
+    Профиль
+
+</a>
+
+{% endif %}
+
+{% else %}
+
+<a href="/login/">Вход</a>
+
+<a href="/register/">Регистрация</a>
+
+{% endif %}
+
+</div>
+
+</nav>
+
+<div class="container">
+
+{% block content %}
+{% endblock %}
+
+</div>
+
+</body>
+
+</html>

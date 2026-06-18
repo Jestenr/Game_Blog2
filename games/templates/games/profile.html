@@ -1,0 +1,59 @@
+{% extends 'games/base.html' %}
+
+{% block content %}
+
+<h1>
+
+Профиль пользователя
+
+</h1>
+
+<br>
+
+<h2>
+
+{{ user.username }}
+
+</h2>
+
+<br>
+
+<h2>
+
+Мои обзоры
+
+</h2>
+
+<br>
+
+{% for review in reviews %}
+
+<div class="card">
+
+    <h3>
+
+        {{ review.game.title }}
+
+    </h3>
+
+    <br>
+
+    <p>
+
+        {{ review.short_text }}
+
+    </p>
+
+    <br>
+
+    <a href="/review/{{ review.id }}/">
+
+        Читать
+
+    </a>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}

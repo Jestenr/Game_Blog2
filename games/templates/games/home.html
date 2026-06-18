@@ -1,0 +1,123 @@
+{% extends 'games/base.html' %}
+
+{% block content %}
+
+<form method="GET">
+
+<input
+type="text"
+name="search"
+placeholder="Поиск игр и обзоров">
+
+</form>
+
+<br>
+
+<h2>🏆 Топ 5 игр</h2>
+
+<br>
+
+<div class="top-games">
+
+{% for game in top_games %}
+
+<div class="card">
+
+{% if game.image %}
+<img src="{{ game.image.url }}">
+{% endif %}
+
+<h3>{{ game.title }}</h3>
+
+<p>⭐ {{ game.average_rating }}</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<br>
+
+<h2>📝 Последние обзоры</h2>
+
+<br>
+
+{% for review in reviews %}
+
+<div class="card">
+
+<h2>Статистика сайта</h2>
+
+    <br>
+
+    <p>
+
+        👥 Пользователей:
+        {{ users_count }}
+
+    </p>
+
+    <br>
+
+    <p>
+
+        🎮 Игр:
+        {{ games_count }}
+
+    </p>
+
+<br>
+
+<p>
+
+<div>
+
+⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+
+</div>
+
+<p>
+
+Оценка:
+{{ review.rating }}/10
+
+</p>
+
+<p>
+
+Дата:
+{{ review.created_at }}
+
+</p>
+
+<br>
+
+<p>
+
+Автор:
+{{ review.author.username }}
+
+</p>
+
+<br>
+
+<a href="/review/{{ review.id }}/">
+
+    Читать обзор →
+
+</a>
+
+</div>
+
+{% empty %}
+
+<p>
+
+Пока обзоров нет
+
+</p>
+
+{% endfor %}
+
+{% endblock %}
